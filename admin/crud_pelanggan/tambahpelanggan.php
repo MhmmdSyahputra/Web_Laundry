@@ -3,6 +3,7 @@ session_start();
 if ($_SESSION['status'] != "log_in") {
     echo "<script>document.location.href='../../index.php?pesan=belum_login'</script>";
 }
+
 require '../../function.php';
 if (isset($_POST['kirim'])) {
     if (tambahpelanggan($_POST) > 0) {
