@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['status'] != "log_in") {
-    echo "<script>document.location.href='../../index.php?pesan=belum_login'</script>";
+    echo "<script>document.location.href='../../login.php?pesan=belum_login'</script>";
 }
 
 require '../../function.php';
@@ -35,6 +35,10 @@ if (isset($_POST['kirim'])) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <style>
+        .content {
+            min-height: calc(100vh - 211px - -60px);
+        }
+
         .alert {
             font-weight: bold;
             text-align: center;
@@ -51,7 +55,7 @@ if (isset($_POST['kirim'])) {
             margin: 20px;
         }
 
-        .col-md-6 {
+        .col-md-5 {
             position: relative;
         }
     </style>
@@ -66,46 +70,48 @@ if (isset($_POST['kirim'])) {
     <br>
 
     <center>
-        <div class="col-md-5 col-offset-5">
+        <div class="content">
+            <div class="col-md-5 col-offset-5">
 
-            <div class="panel">
+                <div class="panel">
 
-                <?php
-                if (isset($_GET['pesan'])) {
-                    if ($_GET['pesan'] == "tidaksesuai") {
-                        echo "<div class='alert alert-danger'>Verifikasi Password Salah!</div>";
+                    <?php
+                    if (isset($_GET['pesan'])) {
+                        if ($_GET['pesan'] == "tidaksesuai") {
+                            echo "<div class='alert alert-danger'>Verifikasi Password Salah!</div>";
+                        }
                     }
-                }
 
-                ?>
+                    ?>
 
-                <div class="panel-body">
+                    <div class="panel-body">
 
-                    <form method="post">
+                        <form method="post">
 
-                        <div class="form-group">
-                            <label>Password Baru</label>
-                            <input type="password" name="password_baru" class="form-control" required autofocus="on">
-                        </div>
+                            <div class="form-group">
+                                <label>Password Baru</label>
+                                <input type="password" name="password_baru" class="form-control" required autofocus="on">
+                            </div>
 
-                        <div class="form-group">
-                            <label>Ulangi Password</label>
-                            <input type="password" name="password_baru2" class="form-control" required>
-                        </div>
+                            <div class="form-group">
+                                <label>Ulangi Password</label>
+                                <input type="password" name="password_baru2" class="form-control" required>
+                            </div>
 
 
-                        <div class="form-group">
-                            <button type="submit" name="kirim" class="btn btn-success">Kirim</button>
-                        </div>
+                            <div class="form-group">
+                                <button type="submit" name="kirim" class="btn btn-success">Kirim</button>
+                            </div>
 
-                    </form>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+
     </center>
-    <br><br>
     <?php include '../../footer.php' ?>
 
 

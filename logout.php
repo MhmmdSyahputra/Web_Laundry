@@ -5,6 +5,4 @@
 	session_unset();
 	session_destroy();
 
-	header("Location: index.php?pesan=logout");
-
- ?>
+	header("Location: login.php?pesan=logout");

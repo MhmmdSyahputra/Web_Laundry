@@ -2,7 +2,7 @@
 
 session_start();
 if ($_SESSION['status'] != "log_in") {
-    echo "<script>document.location.href='../../index.php?pesan=belum_login'</script>";
+    echo "<script>document.location.href='../../login.php?pesan=belum_login'</script>";
 }
 require '../../function.php';
 

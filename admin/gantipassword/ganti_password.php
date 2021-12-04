@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['status'] != "log_in") {
-    echo "<script>document.location.href='../../index.php?pesan=belum_login'</script>";
+    echo "<script>document.location.href='../../login.php?pesan=belum_login'</script>";
 }
 require '../../function.php';
 
@@ -36,6 +36,10 @@ if (isset($_POST['kirim'])) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <style>
+        .content {
+            min-height: calc(100vh - 211px - -60px);
+        }
+
         .alert {
             font-weight: bold;
             text-align: center;
@@ -44,7 +48,7 @@ if (isset($_POST['kirim'])) {
 
         }
 
-        .col-md-6 {
+        .col-md-5 {
             padding: 20px;
             margin: 20px;
         }
@@ -54,7 +58,6 @@ if (isset($_POST['kirim'])) {
             text-align: left;
             background-color: white;
             padding: 20px;
-            margin: 20px;
         }
     </style>
 
@@ -68,43 +71,43 @@ if (isset($_POST['kirim'])) {
     <br>
 
     <center>
-        <div class="col-md-5 col-offset-5">
+        <div class="content">
+            <div class="col-md-5 col-offset-5">
 
-
-
-            <div class="panel">
-                <?php
-                if (isset($_GET['pesan'])) {
-                    if ($_GET['pesan'] == "passwordsalah") {
-                        echo "<div class='alert alert-danger'>Password Salah!</div>";
-                    } elseif ($_GET['pesan'] == "gantipwsukses") {
-                        echo "<div class='alert alert-success'>Password Berhasil Diubah</div>";
+                <div class="panel">
+                    <?php
+                    if (isset($_GET['pesan'])) {
+                        if ($_GET['pesan'] == "passwordsalah") {
+                            echo "<div class='alert alert-danger'>Password Salah!</div>";
+                        } elseif ($_GET['pesan'] == "gantipwsukses") {
+                            echo "<div class='alert alert-success'>Password Berhasil Diubah</div>";
+                        }
                     }
-                }
 
-                ?>
+                    ?>
 
-                <div class="panel-body">
+                    <div class="panel-body">
 
-                    <form method="post">
+                        <form method="post">
 
-                        <div class="form-group">
-                            <label>Password Sekarang</label>
-                            <input type="password" name="password_sekarang" class="form-control" required autofocus="on">
-                        </div>
+                            <div class="form-group">
+                                <label>Password Sekarang</label>
+                                <input type="password" name="password_sekarang" class="form-control" required autofocus="on">
+                            </div>
 
-                        <div class="form-group">
-                            <button type="submit" name="kirim" class="btn btn-success">Kirim</button>
-                        </div>
+                            <div class="form-group">
+                                <button type="submit" name="kirim" class="btn btn-success">Kirim</button>
+                            </div>
 
-                    </form>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+
     </center>
-    <br><br><br><br><br><br>
 
     <?php include '../../footer.php' ?>
 

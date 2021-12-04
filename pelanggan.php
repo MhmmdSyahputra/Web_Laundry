@@ -1,9 +1,6 @@
 <?php
-session_start();
-if ($_SESSION['status'] != "log_in") {
-    echo "<script>document.location.href='../login.php?pesan=belum_login'</script>";
-}
-require '../function.php';
+
+require 'function.php';
 
 
 
@@ -55,15 +52,12 @@ if (isset($_POST['cari'])) {
 <body style="background: #f0f0f0">
 
 
-    <?php include '../header.php'; ?>
+    <?php include 'userComp/header.php'; ?>
     <br>
     <div class="container" style="background-color: white;">
         <h5>Data Pelanggan</h5><br><br>
 
 
-        <a href="crud_pelanggan/tambahpelanggan.php">
-            <button type="button" class="btn btn-primary">Tambah</button>
-        </a>
         <br><br>
 
         <div class="col-md-3 col-offset-3" style="float: left;">
@@ -98,7 +92,6 @@ if (isset($_POST['cari'])) {
                     <th>Nama</th>
                     <th>HP</th>
                     <th>Alamat</th>
-                    <th>Opsi</th>
                 </tr>
 
                 <?php $i = 1; ?>
@@ -108,18 +101,6 @@ if (isset($_POST['cari'])) {
                         <td><?= $customer['pelanggan_nama']; ?></td>
                         <td><?= $customer['pelanggan_hp']; ?></td>
                         <td><?= $customer['pelanggan_alamat']; ?></td>
-                        <td>
-                            <!-- -------EDIT------- -->
-                            <a href="crud_pelanggan/editpelanggan.php?id=<?= $customer['pelanggan_id']; ?>" class="btn btn-warning">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <!-- -------HAPUS------- -->
-                            <a href="crud_pelanggan/hapuspelanggan.php?id=<?= $customer['pelanggan_id']; ?>" onclick="return confirm('Ingin menghapus Ini?')" class="btn btn-danger">
-                                <i class="bi bi-trash-fill"></i>
-                            </a>
-
-                        </td>
                     </tr>
                 <?php endforeach ?>
 
@@ -130,7 +111,7 @@ if (isset($_POST['cari'])) {
 
     </div>
 
-    <?php include '../footer.php' ?>
+    <?php include 'userComp/footer.php' ?>
 
 
 

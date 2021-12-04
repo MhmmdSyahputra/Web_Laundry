@@ -1,20 +1,16 @@
 <?php
-session_start();
-if ($_SESSION['status'] != "log_in") {
-    echo "<script>document.location.href='../login.php?pesan=belum_login'</script>";
-}
-require '../function.php';
 
 
+require 'function.php';
 
-$pelanggan = tampilpelanggan("SELECT *  FROM pelanggan ORDER BY pelanggan_id DESC");
+
+$transaksi = tampildtransaksi("SELECT * FROM transaksi ORDER BY transaksi_id DESC");
 
 if (isset($_POST['cari'])) {
     $inputan = $_POST['inputan'];
 
-    $pelanggan = tampilpelanggan("SELECT * FROM pelanggan WHERE pelanggan_nama LIKE '%$inputan%' ");
+    $transaksi = tampildtransaksi("SELECT * FROM transaksi WHERE transaksi_pelanggan LIKE '%$inputan%' ");
 }
-
 
 ?>
 
@@ -55,20 +51,17 @@ if (isset($_POST['cari'])) {
 <body style="background: #f0f0f0">
 
 
-    <?php include '../header.php'; ?>
+    <?php include 'userComp/header.php'; ?>
     <br>
     <div class="container" style="background-color: white;">
-        <h5>Data Pelanggan</h5><br><br>
+        <h5>Data Transaksi Laundry</h5><br><br>
 
 
-        <a href="crud_pelanggan/tambahpelanggan.php">
-            <button type="button" class="btn btn-primary">Tambah</button>
-        </a>
-        <br><br>
+
 
         <div class="col-md-3 col-offset-3" style="float: left;">
             <form method="post" class="form-group">
-                <input type="text" name="inputan" class="form-control" autofocus autocomplete="off" placeholder="Masukan Nama"><br>
+                <input type="text" name="inputan" class="form-control" autofocus autocomplete="off" placeholder="Nama Pelanggan"><br>
         </div>
 
         <div class="col-md-3 col-offset-3" style="float: left;">
@@ -89,39 +82,43 @@ if (isset($_POST['cari'])) {
         }
 
         ?>
-
         <div class="table-responsive">
 
             <table class="table table-striped">
                 <tr>
                     <th>No</th>
-                    <th>Nama</th>
-                    <th>HP</th>
-                    <th>Alamat</th>
-                    <th>Opsi</th>
+                    <th>Invoice</th>
+                    <th>Tanggal</th>
+                    <th>Pelanggan</th>
+                    <th>Berat(Kg)</th>
+                    <th>Tgl.Selesai</th>
+                    <th>Harga</th>
+                    <th>Status</th>
                 </tr>
 
-                <?php $i = 1; ?>
-                <?php foreach ($pelanggan as $customer) : ?>
+                <?php $i = 1 ?>
+                <?php foreach ($transaksi as $data) : ?>
                     <tr>
                         <td><?= $i++; ?></td>
-                        <td><?= $customer['pelanggan_nama']; ?></td>
-                        <td><?= $customer['pelanggan_hp']; ?></td>
-                        <td><?= $customer['pelanggan_alamat']; ?></td>
+                        <td>pt-<?= $data['transaksi_id']; ?></td>
+                        <td><?= $data['transaksi_tgl']; ?></td>
+                        <td><?= $data['transaksi_pelanggan']; ?></td>
+                        <td><?= $data['transaksi_berat']; ?></td>
+                        <td><?= $data['transaksi_tgl_selesai']; ?></td>
+                        <td>Rp. <?= $data['transaksi_harga']; ?></td>
                         <td>
-                            <!-- -------EDIT------- -->
-                            <a href="crud_pelanggan/editpelanggan.php?id=<?= $customer['pelanggan_id']; ?>" class="btn btn-warning">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <!-- -------HAPUS------- -->
-                            <a href="crud_pelanggan/hapuspelanggan.php?id=<?= $customer['pelanggan_id']; ?>" onclick="return confirm('Ingin menghapus Ini?')" class="btn btn-danger">
-                                <i class="bi bi-trash-fill"></i>
-                            </a>
-
+                            <?php
+                            if ($data['status_transaksi'] == "0") {
+                                echo "<div class='btn btn-warning'>PROSES</div>";
+                            } elseif ($data['status_transaksi'] == "1") {
+                                echo "<div class='btn btn-info'>DICUCI</div>";
+                            } elseif ($data['status_transaksi'] == "2") {
+                                echo "<div class='btn btn-success'>SELESAI</div>";
+                            }
+                            ?>
                         </td>
                     </tr>
-                <?php endforeach ?>
+                <?php endforeach; ?>
 
 
             </table>
@@ -130,7 +127,7 @@ if (isset($_POST['cari'])) {
 
     </div>
 
-    <?php include '../footer.php' ?>
+    <?php include 'userComp/footer.php' ?>
 
 
 
